@@ -1,53 +1,47 @@
-import random
+import random  
+# Import the random module to use for generating random choices
 
 def update_score(outcome, scores):
-  if outcome == "You won!":
-    scores["user"] += 1
-  elif outcome == "You lost.":
-    scores["computer"] += 1
+    # Update the scores dictionary based on the outcome of the game
+    if outcome == "You won!":
+        scores["user"] += 1  # Increment user's score
+    elif outcome == "You lost.":
+        scores["computer"] += 1  # Increment computer's score
 
+# Initialize the scores dictionary with initial scores
 scores = {"user": 0, "computer": 0}
 
 def print_score(scores):
-  print("Scoreboard:")
-  print("You:", scores["user"])
-  print("Computer:", scores["computer"])
+    # Print the current scores
+    print("Scoreboard:")
+    print("You:", scores["user"])
+    print("Computer:", scores["computer"])
 
-while True:
-  items = ["rock", "paper", "scissors"]
-  actions = random.choice(items)
+while True:  # Start an infinite loop for the game
+    items = ["rock", "paper", "scissors"]  # List of possible actions
+    actions = random.choice(items)  # Randomly choose an action for the computer
 
-  user = input("enter your name: ")
+    user = input("Enter your name: ")  # Get the user's name
+    print("Welcome to Rock, Paper, Scissors, " + user + "!")  # Greet the user
 
-  print("Welcome to Rock, Paper, Scissors, " + user + "!")
+    user2 = input("Select rock, paper, or scissors: ")  # Get the user's choice
+    print('You chose ' + user2)  # Print the user's choice
 
-  user2 = input("select rock, paper, or scissors: ")
+    print("The computer chose " + actions)  # Print the computer's choice
 
-  print('you chose ' + user2)
+    if actions == user2:
+        print("It's a tie!")  # If both choices are the same, it's a tie
+    elif (user2 == "rock" and actions == "scissors") or \
+         (user2 == "paper" and actions == "rock") or \
+         (user2 == "scissors" and actions == "paper"):
+        outcome = "You won!"  # Determine if the user won
+    else:
+        outcome = "You lost."  # Determine if the user lost
 
-  print("The computer chose " + actions)
+    print(outcome)  # Print the outcome of the game
+    update_score(outcome, scores)  # Update the scores based on the outcome
+    print_score(scores)  # Print the updated scores
 
-  if actions == user2:
-    print("It's a tie!")
-  elif (user2 == "rock" and actions == "scissors") or \
-     (user2 == "paper" and actions == "rock") or \
-     (user2 == "scissors" and actions == "paper"):
-    outcome = ("You won!")
-  else:
-    outcome = ("You lost.")
-    
-    print(outcome)
-    update_score(outcome, scores)
-    print_score(scores)
-  
-
-
-  
-  
-  play_again = input("play again? (y/n): ")
-  if play_again.lower() !="y":
-    break
-
-
-
-          
+    play_again = input("Play again? (y/n): ")  # Ask the user if they want to play again
+    if play_again.lower() != "y":
+        break  # Exit the loop if the user does not want to play again
